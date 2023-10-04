@@ -17,9 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers/" />
-    <Folder Include="Data/" />
-    <Folder Include="Models/" />
+    <Folder Include="Data/Implementations/" />
+    <Folder Include="Data/Interfaces/" />
   </ItemGroup>
 
 </Project>
