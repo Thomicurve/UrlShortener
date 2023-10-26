@@ -6,4 +6,5 @@ public class UrlForCreationDto
 {
     [RegularExpression(@"^.*(?=.*\/.*\/)(?=.*:).*$", ErrorMessage = "La url debe ser válida")]
     public string Url { get; set; }
+    public int? CategoryId { get; set; }
 }

@@ -14,10 +14,20 @@ public class UrlController : ControllerBase
     [HttpPost]
     public IActionResult CreateUrl([FromBody] UrlForCreationDto urlDto) {
         string stringRandom = UrlTransfomer.GenerarCadenaAleatoria();
+        if(urlDto.CategoryId != null) {
+            Category? categorySelected = _context.Categories
+                .FirstOrDefault(c => c.Id == urlDto.CategoryId);
+
+            if(categorySelected is null) {
+                return NotFound("La categoría no existe");
+            }
+        }
 
         _context.Add(new Url() {
             LongUrl = urlDto.Url,
-            ShortUrl = "https://urlshortx/" + stringRandom
+            ShortUrl = "https://urlshortx/" + stringRandom,
+            VisitCounter = 0,
+            CategoryId = urlDto.CategoryId
         });
         _context.SaveChanges();
 
@@ -31,6 +41,10 @@ public class UrlController : ControllerBase
         if (url == null) {
             return NotFound("La url no existe");
         }
+
+        url.VisitCounter++;
+        _context.Urls.Add(url);
+        _context.SaveChanges();
 
         return Redirect(url.LongUrl);
     }
