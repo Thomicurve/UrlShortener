@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace UrlShortener;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class CategoryController : ControllerBase
 {
@@ -15,6 +17,7 @@ public class CategoryController : ControllerBase
     public IActionResult Create([FromBody] CategoryForCreationDto categoryDto) {
         _context.Categories.Add(new Category() {
             Name = categoryDto.Name,
+            UserId = int.Parse(User.Claims.First(x => x.Type == "userId").Value)
         });
         _context.SaveChanges();
 
@@ -23,10 +26,14 @@ public class CategoryController : ControllerBase
 
     [HttpGet]
     public IActionResult GetAll() {
-        List<CategoryForViewDto> categories = _context.Categories.Select(c => new CategoryForViewDto {
-            Id = c.Id,
-            Name = c.Name
-        }).ToList();
+        int userId = int.Parse(User.Claims.First(x => x.Type == "userId").Value);
+        List<CategoryForViewDto> categories = _context.Categories
+            .Where(c => c.UserId == userId)
+            .Select(c => new CategoryForViewDto {
+                Id = c.Id,
+                Name = c.Name
+            })
+            .ToList();
         
         return Ok(categories);
     }

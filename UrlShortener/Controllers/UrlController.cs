@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace UrlShortener;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class UrlController : ControllerBase
 {
@@ -13,7 +15,8 @@ public class UrlController : ControllerBase
 
     [HttpGet]
     public IActionResult GetAllUrls() {
-        var urls = _context.Urls.ToList();
+        int userId = int.Parse(User.Claims.First(x => x.Type == "userId").Value);
+        var urls = _context.Urls.Where(u => u.UserId == userId).ToList();
         return Ok(urls);
     }
 
@@ -29,11 +32,13 @@ public class UrlController : ControllerBase
             }
         }
 
+        int userId = int.Parse(User.Claims.First(x => x.Type == "userId").Value);
         _context.Add(new Url() {
             LongUrl = urlDto.Url,
             ShortUrl = "https://urlshortx/" + stringRandom,
             VisitCounter = 0,
-            CategoryId = urlDto.CategoryId
+            CategoryId = urlDto.CategoryId,
+            UserId = userId
         });
         _context.SaveChanges();
 
@@ -42,7 +47,9 @@ public class UrlController : ControllerBase
 
     [HttpPost("redirect")]
     public IActionResult GetUrl([FromBody] UrlForRedirectDto urlDto) {
-        var url = _context.Urls.FirstOrDefault(u => u.ShortUrl == urlDto.ShortUrl);
+        int userId = int.Parse(User.Claims.First(x => x.Type == "userId").Value);
+        var url = _context.Urls
+            .FirstOrDefault(u => u.ShortUrl == urlDto.ShortUrl && u.UserId == userId);
 
         if (url == null) {
             return NotFound("La url no existe");

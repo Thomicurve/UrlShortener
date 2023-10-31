@@ -11,4 +11,6 @@ public class Category
     [Required]
     public string Name { get; set; }
     public ICollection<Url> Urls { get; set; }
+    public int UserId { get; set; }
+    public User User { get; set; }
 }

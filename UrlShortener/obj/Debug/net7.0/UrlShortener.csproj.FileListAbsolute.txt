@@ -67,3 +67,10 @@
 /Users/thomascurveloferrer/Desktop/Austral/Programacion web/UrlShorter/UrlShortener/UrlShortener/obj/Debug/net7.0/UrlShortener.pdb
 /Users/thomascurveloferrer/Desktop/Austral/Programacion web/UrlShorter/UrlShortener/UrlShortener/obj/Debug/net7.0/UrlShortener.genruntimeconfig.cache
 /Users/thomascurveloferrer/Desktop/Austral/Programacion web/UrlShorter/UrlShortener/UrlShortener/obj/Debug/net7.0/ref/UrlShortener.dll
+/Users/thomascurveloferrer/Desktop/Austral/Programacion web/UrlShorter/UrlShortener/UrlShortener/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/thomascurveloferrer/Desktop/Austral/Programacion web/UrlShorter/UrlShortener/UrlShortener/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/thomascurveloferrer/Desktop/Austral/Programacion web/UrlShorter/UrlShortener/UrlShortener/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/Users/thomascurveloferrer/Desktop/Austral/Programacion web/UrlShorter/UrlShortener/UrlShortener/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/Users/thomascurveloferrer/Desktop/Austral/Programacion web/UrlShorter/UrlShortener/UrlShortener/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/thomascurveloferrer/Desktop/Austral/Programacion web/UrlShorter/UrlShortener/UrlShortener/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/Users/thomascurveloferrer/Desktop/Austral/Programacion web/UrlShorter/UrlShortener/UrlShortener/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
