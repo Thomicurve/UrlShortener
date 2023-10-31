@@ -11,6 +11,12 @@ public class UrlController : ControllerBase
         _context = context;
     }
 
+    [HttpGet]
+    public IActionResult GetAllUrls() {
+        var urls = _context.Urls.ToList();
+        return Ok(urls);
+    }
+
     [HttpPost]
     public IActionResult CreateUrl([FromBody] UrlForCreationDto urlDto) {
         string stringRandom = UrlTransfomer.GenerarCadenaAleatoria();
@@ -43,7 +49,7 @@ public class UrlController : ControllerBase
         }
 
         url.VisitCounter++;
-        _context.Urls.Add(url);
+        _context.Urls.Update(url);
         _context.SaveChanges();
 
         return Redirect(url.LongUrl);
